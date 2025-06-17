@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;400;500;600;700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-jet: #2f2e2b;
+  --color-floral: #f1eeee;
+  --color-gold: #eba910;
+  --font-hind: "Hind Vadodara", sans-serif;
+  --font-tajawal: "Tajawal", sans-serif;
+}
+
+body {
+  @apply font-tajawal dark:bg-floral;
+}
+
+.transition-base {
+  @apply transition-all duration-150;
+}
+
+input {
+  @apply outline-none focus:outline-none;
+}
+
+button {
+  @apply cursor-pointer w-fit;
+}
+
+.input {
+  @apply px-3 py-2 border-1 border-gray-400 shadow-2xl;
+}
+
+.btn {
+  @apply px-4 py-2 flex items-center justify-center gap-2 cursor-pointer transition-all duration-150;
+}
+
+.btn-full {
+  @apply w-full;
+}
+
+.btn-wide {
+  @apply w-[250px];
+}
+
+.btn-rounded {
+  @apply bg-gold hover:bg-gold/90 rounded-3xl text-white shadow-xl;
+}
+
+.btn-curved {
+  @apply bg-gold hover:bg-gold/90 rounded-md text-white;
+}
+
+.btn-outline {
+  @apply border-2 border-gold/30 hover:bg-gold/20 hover:border-transparent rounded-xl text-gold;
+}
+
+.btn-outline-rounded {
+  @apply border-1 rounded-3xl hover:bg-gold/10 transition-all duration-150 border-jet/50;
+}
+
+.input-rounded {
+  @apply rounded-3xl;
+}
+
+.alert {
+  @apply p-2 rounded-sm;
+}
+
+.alert-success {
+  @apply bg-green-100 text-green-500;
+}
+
+.alert-error {
+  @apply bg-red-100 text-red-500;
+}
+
+.select {
+  @apply px-5 py-2 border-1 border-jet/50;
+}
+
+.select-rounded {
+  @apply rounded-3xl;
+}
+
+.container {
+  @apply sm:px-5 md:max-w-5xl mx-auto;
+}
+
+.socials {
+  @apply flex w-fit items-center gap-3 mx-auto mt-5;
+}
+
+.socials-icon-container {
+  @apply border-1 rounded-full p-2;
+}
+
+.socials-icon {
+  @apply text-xl;
+}
