@@ -1,4 +1,4 @@
-import { Button } from "@/components/common";
+import { Button } from "@/components";
 import { Skills } from "./skills";
 import { Description } from "./description";
 

@@ -7,10 +7,19 @@
   --color-gold: #eba910;
   --font-hind: "Hind Vadodara", sans-serif;
   --font-tajawal: "Tajawal", sans-serif;
+  --font-hind:: "Hind Vadora", sans-serif; 
 }
 
 body {
-  @apply font-tajawal dark:bg-floral;
+  @apply font-hind dark:bg-floral dark:text-jet text-jet;
+}
+
+h1, h2,h3, h4, h5, h6 {
+  @apply opacity-100 font-semibold
+}
+
+p {
+  @apply text-sm opacity-100;
 }
 
 .transition-base {

@@ -1,6 +1,6 @@
 import { CgInfo } from "react-icons/cg";
 import { MdOutlineAdd } from "react-icons/md";
-import { Button } from "@/components/common";
+import { Button } from "@/components";
 
 export const Skills = () => {
   return (

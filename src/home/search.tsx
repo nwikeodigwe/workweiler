@@ -2,7 +2,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoMdNotifications } from "react-icons/io";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FaFilter } from "react-icons/fa";
-import { Button, Select, Input } from "../components/common";
+import { Button, Select, Input } from "@/components";
 
 export const Search = () => {
   return (

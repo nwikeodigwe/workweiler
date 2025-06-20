@@ -13,7 +13,7 @@ export const Footer = () => {
           </div>
           <div>
             <h2 className="font-semibold">Workweiler</h2>
-            <ul className="flex flex-col gap-2 mt-2">
+            <ul className="flex flex-col gap-2 mt-2 text-sm">
               <li>
                 <Link to="/blog">Blog</Link>
               </li>
@@ -30,7 +30,7 @@ export const Footer = () => {
           </div>
           <div>
             <h2 className="font-semibold">Employer</h2>
-            <ul className="flex flex-col gap-2 mt-2">
+            <ul className="flex flex-col gap-2 mt-2 text-sm">
               <li>
                 <Link to="/employer/faq">FAQ</Link>
               </li>
@@ -38,7 +38,7 @@ export const Footer = () => {
           </div>
           <div>
             <h2 className="font-semibold">Candidate</h2>
-            <ul className="flex flex-col gap-2 mt-2">
+            <ul className="flex flex-col gap-2 mt-2 text-sm">
               <li>
                 <Link to="/listings">Job Listings</Link>
               </li>

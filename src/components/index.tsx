@@ -1,10 +1,10 @@
 import { Outlet } from "react-router";
-import { Header } from "./header";
-import { Footer } from "./footer";
-import Input from "./input";
-import Button from "./button";
-import Select from "./select";
-import Alert from "./alert";
+import { Header } from "./common/header";
+import { Footer } from "./common/footer";
+import Input from "./common/input";
+import Button from "./common/button";
+import Select from "./common/select";
+import Alert from "./common/alert";
 
 const Layout = () => {
   return (

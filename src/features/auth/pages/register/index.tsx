@@ -1,12 +1,14 @@
-import { Back } from "../back";
-import { Link } from "react-router";
-import { Alert, Button, Input } from "../../components/common";
+import { Back } from "../../components/back";
+import { Link, useNavigate } from "react-router";
+import { Alert, Button, Input } from "@/components";
 import useFirebase from "@/provider/firebase/context";
 import { useForm, Controller, type SubmitHandler } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import React from "react";
-import register from "../functions/register";
+import { Auth } from "../../utils";
+import SignInWithGoogle from "../login/signinWithGoogle";
+import { useDispatch } from "react-redux";
+import { set_user } from "@/features/slices/user";
 
 interface Inputs {
   firstname: string;
@@ -18,6 +20,9 @@ interface Inputs {
 const Index = () => {
   const [error, setError] = React.useState<null | string>();
   const { auth } = useFirebase();
+  const authenticate = new Auth(auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -34,16 +39,23 @@ const Index = () => {
 
   const registerUser: SubmitHandler<Inputs> = async (data) => {
     try {
-      const res = await register({
-        auth,
+      const { user } = await authenticate.register({
         firstname: data.firstname,
         lastname: data.lastname,
         email: data.email,
         password: data.password,
       });
-      console.log(res);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { uid, email } = user;
+      const idToken = await user.getIdToken();
+      const accessToken = await user.getIdToken(true);
+      const displayName = user.displayName || "";
+      const [firstname, lastname] = displayName.split(" ");
+      dispatch(
+        set_user({ id: uid, accessToken, idToken, email, firstname, lastname })
+      );
+      navigate("/");
     } catch (err) {
+      console.log(err);
       setError("An unexpected error occurred. Please try again later.");
     }
   };
@@ -189,19 +201,14 @@ const Index = () => {
               <span className="px-2 bg-white text-gray-500">or</span>
             </div>
           </div>
-
-          <Button variant="outline" className="btn-full border-gray-300">
-            <FcGoogle className="text-xl" />
-            <span>Sign in with Google</span>
-          </Button>
-
-          <p className="text-center text-sm text-gray-500">
-            Already have an account?{" "}
-            <Link to="/auth" className="text-gray-600 hover:text-gray-800">
-              Log in
-            </Link>
-          </p>
         </form>
+        <SignInWithGoogle />
+        <p className="text-center text-sm text-gray-500">
+          Already have an account?{" "}
+          <Link to="/auth" className="text-gray-600 hover:text-gray-800">
+            Log in
+          </Link>
+        </p>
       </div>
     </div>
   );

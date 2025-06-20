@@ -1,12 +1,14 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm, Controller, type SubmitHandler } from "react-hook-form";
-import { login } from "../functions";
 import useFirebase from "@/provider/firebase/context";
-import { Button, Alert, Input } from "@/components/common";
+import { Button, Alert, Input } from "@/components";
+import { set_user } from "@/features/slices/user";
 import { FcGoogle } from "react-icons/fc";
-import { Back } from "../back";
-import signInWithGoogle from "../functions/login_with_google";
+import { Back } from "../../components/back";
+import { Auth } from "../../utils/";
+import { useDispatch } from "react-redux";
+import signInWithGoogle from "../../services/functions/login_with_google";
 
 interface Inputs {
   email: string;
@@ -16,23 +18,30 @@ interface Inputs {
 const Index = () => {
   const [error, setError] = React.useState<null | string>();
   const { auth } = useFirebase();
+  const authenticate = new Auth(auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({ defaultValues: { email: "", password: "" } });
 
   const LoginUser: SubmitHandler<Inputs> = async (data) => {
     try {
-      const res = await login({
-        auth,
-        email: data.email,
-        password: data.password,
-      });
-      console.log(res);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { user } = await authenticate.login(data.email, data.password);
+      const { uid, email } = user;
+      const idToken = await user.getIdToken();
+      const accessToken = await user.getIdToken(true);
+      const displayName = user.displayName || "";
+      const [firstname, lastname] = displayName.split(" ");
+      dispatch(
+        set_user({ id: uid, accessToken, idToken, email, firstname, lastname })
+      );
+      navigate("/");
     } catch (err) {
+      console.log(err);
       setError("Invalid login credentials");
     }
   };
@@ -116,26 +125,25 @@ const Index = () => {
               <span className="px-2 bg-white text-gray-500">or</span>
             </div>
           </div>
-
-          <Button
-            onClick={() => signInWithGoogle(auth)}
-            variant="outline"
-            className="btn-full border-gray-300"
-          >
-            <FcGoogle className="text-xl" />
-            <span>Sign in with Google</span>
-          </Button>
-
-          <p className="text-center text-sm text-gray-500">
-            New Workweiler?{" "}
-            <Link
-              to="/auth/register"
-              className="text-gray-600 hover:text-gray-800"
-            >
-              Create Account
-            </Link>
-          </p>
         </form>
+        <Button
+          onClick={() => signInWithGoogle(auth)}
+          variant="outline"
+          className="btn-full border-gray-300"
+        >
+          <FcGoogle className="text-xl" />
+          <span>Sign in with Google</span>
+        </Button>
+
+        <p className="text-center text-sm text-gray-500">
+          New Workweiler?{" "}
+          <Link
+            to="/auth/register"
+            className="text-gray-600 hover:text-gray-800"
+          >
+            Create Account
+          </Link>
+        </p>
       </div>
     </div>
   );

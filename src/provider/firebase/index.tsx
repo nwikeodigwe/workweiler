@@ -7,7 +7,16 @@ interface Props {
   children: React.ReactNode;
 }
 
-const FirebaseContext = React.createContext({});
+// Define the context type
+interface FirebaseContextType {
+  app: ReturnType<typeof initializeApp>;
+  auth: ReturnType<typeof getAuth>;
+}
+
+// Use the type in React.createContext
+const FirebaseContext = React.createContext<FirebaseContextType | undefined>(
+  undefined
+);
 
 const Provider = ({ children }: Props) => {
   const app = React.useMemo(() => initializeApp(config), []);

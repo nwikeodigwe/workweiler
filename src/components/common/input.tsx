@@ -5,6 +5,7 @@ interface Props {
   variant?: "rounded" | "square" | "curved";
   id?: string;
   name?: string;
+  ref?: React.Ref<HTMLInputElement>;
   value?: string;
   type?: string;
   placeholder?: string;

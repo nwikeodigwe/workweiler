@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Button as Btn } from "@/components/common";
+import { Button as Btn } from "@/components";
 import { AiFillThunderbolt } from "react-icons/ai";
 
 interface Props {

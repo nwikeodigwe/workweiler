@@ -1,11 +1,11 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyDcfGbTixb6CcuJC84rDOdUQUEKBCcjxdY",
-  authDomain: "workweiler.firebaseapp.com",
-  projectId: "workweiler",
-  storageBucket: "workweiler.firebasestorage.app",
-  messagingSenderId: "534678955",
-  appId: "1:534678955:web:badbadc5dec798ef7ad6ee",
-  measurementId: "G-Q3067TBZ24",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 export default firebaseConfig;

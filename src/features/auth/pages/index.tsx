@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import Login from "./login";
 import Register from "./register";
+import Reset from "./reset";
 import image from "@/assets/job-hunt.svg";
 
 export default function Index() {
@@ -28,4 +29,4 @@ export default function Index() {
   );
 }
 
-export { Login, Register };
+export { Login, Register, Reset };

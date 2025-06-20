@@ -17,6 +17,7 @@ export const Header = () => {
               type="text"
               variant="rounded"
               placeholder="Search"
+              className="w-[300px]"
             />
             <Notification />
             <Chat />
